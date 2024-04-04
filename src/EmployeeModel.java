@@ -1,6 +1,3 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -17,6 +14,22 @@ public class EmployeeModel implements MainMethods {
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
 
+    }
+
+    public int getHoursWorked() {
+        return hoursWorked;
+    }
+
+    public void setHoursWorked(int hoursWorked) {
+        this.hoursWorked = hoursWorked;
+    }
+
+    public int getHoursOvertime() {
+        return hoursOvertime;
+    }
+
+    public void setHoursOvertime(int hoursOvertime) {
+        this.hoursOvertime = hoursOvertime;
     }
 
     public String getFullName() {
