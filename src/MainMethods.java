@@ -55,24 +55,36 @@ public interface MainMethods {
     static boolean isExisting(String fullName) {
         return employees.containsKey(fullName);
     }
-
+    // For the employee to set their hours of work
     static void setHours() {
         Scanner in = new Scanner(System.in);
         System.out.print("Enter your full name: ");
         String fullName = in.nextLine().trim();
         if(!MainMethods.isExisting(fullName)) {
             System.out.println("No data found.");
+            return;
         }
         EmployeeModel emp = employees.get(fullName);
         try {
             System.out.print("Enter your hours worked: ");
             emp.setHoursWorked(in.nextInt());
-            updateEmployeesDatabase();
+            addToReviewHoursWorkedList(fullName, emp.getHoursWorked());
+            System.out.println("Thank you and please kindly wait while we are reviewing this.");
         }catch(InputMismatchException e) {
             System.out.println("Input a valid number. ");
         }
     }
-
+    // function to add a text on the list
+    static void addToReviewHoursWorkedList(String fullName, int hoursWorked) {
+        try {
+            BufferedWriter file = new BufferedWriter(new FileWriter("hoursWorkedReviewList.txt", true));
+            file.write(fullName + " | " + hoursWorked + "\n");
+            file.close();
+        }catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    // function to update the employee database
     static void updateEmployeesDatabase() {
         try {
             BufferedWriter file = new BufferedWriter(new FileWriter("employeesDB.txt"));
@@ -89,6 +101,33 @@ public interface MainMethods {
             }
             file.close();
             System.out.println("Database updated.");
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    // Function to show the review list
+    static void showReviewList() {
+        try {
+            BufferedReader file = new BufferedReader(new FileReader("hoursWorkedReviewList.txt"));
+            String line;
+            System.out.println("Employee Name | Reported Hours Worked");
+            while((line = file.readLine()) != null) {
+                System.out.println(line);
+            }
+        }catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    // Function to update the employeesDB.txt once the review list is accepted
+    static void approveReviewList() {
+        try {
+            BufferedReader file = new BufferedReader(new FileReader("hoursWorkedReviewList.txt"));
+            String line;
+            while((line = file.readLine()) != null) {
+                String[] data = line.split("\\|");
+                employees.get(data[0].trim()).setHoursWorked(Integer.parseInt(data[1].trim()));
+            }
+            updateEmployeesDatabase();
         } catch(IOException e) {
             System.out.println(e.getMessage());
         }
