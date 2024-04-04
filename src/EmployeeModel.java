@@ -6,6 +6,7 @@ public class EmployeeModel implements MainMethods {
     private long phoneNumber;
     private int hoursWorked;
     private int hoursOvertime;
+    private int salaryRate;
     private double grossPay;
     private double governmentDeductions;
     private double netPay;
@@ -14,6 +15,14 @@ public class EmployeeModel implements MainMethods {
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
 
+    }
+
+    public int getSalaryRate() {
+        return salaryRate;
+    }
+
+    public void setSalaryRate(int salaryRate) {
+        this.salaryRate = salaryRate;
     }
 
     public int getHoursWorked() {
