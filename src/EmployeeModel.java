@@ -19,22 +19,6 @@ public class EmployeeModel implements MainMethods {
 
     }
 
-    public int getHoursWorked() {
-        return hoursWorked;
-    }
-
-    public void setHoursWorked(int hoursWorked) {
-        this.hoursWorked = hoursWorked;
-    }
-
-    public int getHoursOvertime() {
-        return hoursOvertime;
-    }
-
-    public void setHoursOvertime(int hoursOvertime) {
-        this.hoursOvertime = hoursOvertime;
-    }
-
     public String getFullName() {
         return fullName;
     }
