@@ -17,7 +17,16 @@ public interface MainMethods {
                 // Converting the string to array
                 String[] data = line.split("\\|");
                 // Creating an employee model object
-                employees.put(data[0].trim(), new EmployeeModel(data[0], Long.parseLong(data[1].trim()), Integer.parseInt(data[2].trim())));
+                employees.put(data[0].trim(), new EmployeeModel(
+                        data[0],
+                        Long.parseLong(data[1].trim()),
+                        Integer.parseInt(data[2].trim()),
+                        Integer.parseInt(data[3].trim()),
+                        Double.parseDouble(data[4].trim()),
+                        Double.parseDouble(data[5].trim()),
+                        Double.parseDouble(data[6].trim()),
+                        Double.parseDouble(data[7].trim())
+                        ));
             }
         }catch(IOException e) {
             System.out.println(e.getMessage());
@@ -115,6 +124,19 @@ public interface MainMethods {
             System.out.println(e.getMessage());
         }
     }
+    // Function to correct hours worked if needed
+    static void correctDetails() {
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter the employee full name: ");
+        String fullName = in.nextLine().trim();
+        if(employees.containsKey(fullName)) {
+            System.out.print("Enter the corrected hours worked: ");
+            int hoursWorked = in.nextInt();
+            employees.get(fullName).setHoursWorked(hoursWorked);
+            updateEmployeesDatabase();
+        }
+    }
+
     // Function to update the employeesDB.txt once the review list is accepted
     static void approveReviewList() {
         try {
@@ -125,6 +147,10 @@ public interface MainMethods {
                 employees.get(data[0].trim()).setHoursWorked(Integer.parseInt(data[1].trim()));
             }
             updateEmployeesDatabase();
+            // Clearing the data inside the .txt file
+            BufferedWriter file1 = new BufferedWriter(new FileWriter("hoursWorkedReviewList.txt"));
+            file1.write("");
+            file1.close();
         } catch(IOException e) {
             System.out.println(e.getMessage());
         }
@@ -141,5 +167,7 @@ public interface MainMethods {
         }
         if(count == 0) System.out.println("All employees reported their hours worked");
     }
+
+
 
 }

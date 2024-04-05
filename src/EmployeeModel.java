@@ -6,7 +6,7 @@ public class EmployeeModel implements MainMethods {
     private long phoneNumber;
     private int hoursWorked;
     private int hoursOvertime;
-    private int salaryRate;
+    private double salaryRate;
     private double grossPay;
     private double governmentDeductions;
     private double netPay;
@@ -17,17 +17,22 @@ public class EmployeeModel implements MainMethods {
 
     }
 
-    public EmployeeModel(String fullName, long phoneNumber, int hoursWorked) {
+    public EmployeeModel(String fullName, long phoneNumber, int hoursWorked, int hoursOvertime, double salaryRate, double grossPay, double governmentDeductions, double netPay) {
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
         this.hoursWorked = hoursWorked;
+        this.hoursOvertime = hoursOvertime;
+        this.salaryRate = salaryRate;
+        this.grossPay = grossPay;
+        this.governmentDeductions = governmentDeductions;
+        this.netPay = netPay;
     }
 
-    public int getSalaryRate() {
+    public double getSalaryRate() {
         return salaryRate;
     }
 
-    public void setSalaryRate(int salaryRate) {
+    public void setSalaryRate(double salaryRate) {
         this.salaryRate = salaryRate;
     }
 
@@ -118,3 +123,7 @@ public class EmployeeModel implements MainMethods {
         return new EmployeeModel(fullName, phoneNumber);
     }
 }
+
+//2882
+//email support@gcash
+// 0272139999 8 to 5 sunday
