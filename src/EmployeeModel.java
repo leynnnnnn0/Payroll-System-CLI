@@ -17,6 +17,12 @@ public class EmployeeModel implements MainMethods {
 
     }
 
+    public EmployeeModel(String fullName, long phoneNumber, int hoursWorked) {
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.hoursWorked = hoursWorked;
+    }
+
     public int getSalaryRate() {
         return salaryRate;
     }

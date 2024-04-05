@@ -1,8 +1,5 @@
 import java.io.*;
-import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public interface MainMethods {
     // I used hashmap for employees data to avoid using loops to improve time complexity
@@ -20,7 +17,7 @@ public interface MainMethods {
                 // Converting the string to array
                 String[] data = line.split("\\|");
                 // Creating an employee model object
-                employees.put(data[0].trim(), new EmployeeModel(data[0], Long.parseLong(data[1].trim())));
+                employees.put(data[0].trim(), new EmployeeModel(data[0], Long.parseLong(data[1].trim()), Integer.parseInt(data[2].trim())));
             }
         }catch(IOException e) {
             System.out.println(e.getMessage());
@@ -131,6 +128,18 @@ public interface MainMethods {
         } catch(IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+    // To check if all employees reported their hours worked
+    static void isAllEmployeesReported() {
+        int count = 0;
+        for(Map.Entry<String, EmployeeModel> employee: employees.entrySet()) {
+            if(employee.getValue().getHoursWorked() == 0) {
+                System.out.println(employee.getValue().getHoursWorked());
+                System.out.println(employee.getKey() + " have not reported his/her hours worked yet.");
+                count++;
+            }
+        }
+        if(count == 0) System.out.println("All employees reported their hours worked");
     }
 
 }
